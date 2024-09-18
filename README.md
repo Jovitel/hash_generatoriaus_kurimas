@@ -1,1 +1,1 @@
-# BGT
+# Hash generatoriaus kūrimas
