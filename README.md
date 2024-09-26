@@ -18,3 +18,16 @@ Galimi pasirinkimai:
 5 - atidaryti tuščią failą.
 
 6 - BAIGTI DARBĄ.
+
+## Ekspermentinis tyrimas ir rezultatų analizė
+
+### Sukurti reikiamus failus
+
+Bent du failai būtų sudaryti tik iš vieno, tačiau skirtingo, simbolio. **vienas_a.txt ir vienas_b.txt**
+
+Bent du failai būtų sudaryti iš daug (> 1000) atsitiktinai sugeneruotų simbolių. **random_input_1.txt ir random_input_2.txt**
+
+Bent du failai būtų sudaryti iš daug (> 1000) simbolių,
+bet skirtųsi vienas nuo kito tik vienu (pvz. vidurinėje pozicijoje esančiu) simboliu. **1_random_input_symbol.txt ir 2_random_input_symbol.txt**
+
+Tuščio failo. **tuscias.txt**
