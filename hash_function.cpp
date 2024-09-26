@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <chrono> // Pridėta biblioteka laiko matavimui
 
 // Funkcija, kuri konvertuoja simbolių eilutę į ASCII kodus
 std::string stringToASCII(const std::string& input) {
@@ -16,23 +17,18 @@ std::string stringToASCII(const std::string& input) {
     return asciiStream.str();
 }
 
-// Funkcija, kuri modifikuoja simbolių eilutę, pakeisdama kiekvieną simbolį tiek pozicijų, kelintas jis yra eilutėje
 std::string modifyString(const std::string& input) {
     std::string modified = input;
 
     for (size_t i = 0; i < modified.length(); i++) {
         char& c = modified[i];
         if (isalpha(c)) {
-            int shift = (i + 1) % 26;  // Perkeliame tiek pozicijų, kelintas yra simbolis (naudojame mod 26, kad neviršytume abėcėlės ribų)
-            c = c + shift;
+            // Nustatome, kurioje vietoje abėcėlėje yra simbolis (pradedame nuo 'A' arba 'a')
+            int base = isupper(c) ? 'A' : 'a';
+            int alphabeticPosition = c - base; // nustatome simbolio poziciją abėcėlėje
 
-            // Užtikriname, kad abėcėlė užsidarytų cikle
-            if (isupper(c) && c > 'Z') {
-                c -= 26;  // Jei peržengėme 'Z', grįžtame į 'A'
-            }
-            if (islower(c) && c > 'z') {
-                c -= 26;  // Jei peržengėme 'z', grįžtame į 'a'
-            }
+            int shift = (alphabeticPosition + (i + 1)) % 26; // apskaičiuojame perkėlimą
+            c = base + shift; // perkeliamas į naują vietą pagal abėcėlės pradžią
         }
     }
 
@@ -98,6 +94,9 @@ std::string processLongerInput(const std::string& input) {
 
 // Maišos funkcija, kuri sugeneruoja 64 simbolių ilgumo maišos kodą
 std::string generateHash(const std::string& input) {
+    auto start = std::chrono::high_resolution_clock::now(); // Pradėti matuoti laiką
+
+    std::string hash;
     if (input.length() <= 64) {
         // Jei įvesties ilgis <= 64, naudojame pirmąjį metodą
         std::string asciiHash = stringToASCII(input);
@@ -113,10 +112,17 @@ std::string generateHash(const std::string& input) {
             asciiHash = asciiHash.substr(0, 64);
         }
 
-        return asciiHash;
+        hash = asciiHash;
 
     } else {
         // Jei įvesties ilgis > 64, naudojame antrąjį metodą
-        return processLongerInput(input);
+        hash = processLongerInput(input);
     }
+
+    auto end = std::chrono::high_resolution_clock::now(); // Pabaigti matuoti laiką
+    std::chrono::duration<double, std::milli> elapsed = end - start; // Laikas milisekundėmis
+
+    std::cout << "Hash sukurimo laikas: " << elapsed.count() << " ms" << std::endl; // Atspausdinti laiką
+
+    return hash;
 }
