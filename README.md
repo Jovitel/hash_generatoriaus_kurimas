@@ -6,9 +6,15 @@
 ## Programos veikimas:
 
 Galimi pasirinkimai:
+
 1 - įvesti simbolius
+
 2 - atidaryti failus, sudarytus tik iš vieno, bet skirtingo simbolio.
+
 3 - atidaryti failus, sudarytus iš daug (> 1000) atsitiktinai sugeneruotų simbolių.
+
 4 - atidaryti failus, sudarytus iš daug (> 1000) simbolių, bet besiskiriančių vienas nuo kito tik vienu simboliu.
+
 5 - atidaryti tuščią failą.
+
 6 - BAIGTI DARBĄ.
