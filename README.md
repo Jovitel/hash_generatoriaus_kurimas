@@ -32,7 +32,7 @@ bet skirtųsi vienas nuo kito tik vienu (pvz. vidurinėje pozicijoje esančiu) s
 
 Tuščio failo. **tuscias.txt**
 
-### Patikrinti ar funkcijai atitinka reikalavimai
+### 1. Patikrinti ar funkcijai atitinka reikalavimai
 
 1. Maišos funkcijos įėjimas (angl. input) gali būti bet kokio dydžio simbolių eilutė (angl.string).
    
@@ -80,3 +80,43 @@ Hash: 4c6965747576614d6b68787a62684d6b68787a62684d6b68787a62684d6b6878
 
 Funkcija yra deterministinė
 
+### 2. Hash apskaičiavimo laikas
+
+*Naudojau failus su 1000, 2000, 3000, 4000 simboliais.*
+
++-------------------+--------+--------+--------+-------+
+| Simbolių skaičius | 1000   | 2000   | 3000   | 4000  |
++-------------------+--------+--------+--------+-------+
+| Laikas (ms)       | 0.0767 | 0.1196 | 0.2999 | 0.452 |
++-------------------+--------+--------+--------+-------+
+
+**Rezultatas**
+
+Naudojant didesni kiekį simbolių, laikas irgi didėja. Bandysiu patobulinti efektyvumą.
+
+### 3.  Iš hash funkcijos rezultato (output'o) praktiškai neįmanoma atgaminti pradinio įvedimo (input'o).
+
+**Rezultatas**
+
+Iš anksčiau matytų output'ų ir input'ų galima teigti, jog jie nėra susiję, tačiau reikia didinti Lavinos efektą.
+
+### 4. Lavinos efektas (angl. Avalanche effect)
+
+```
+Original string: lietuva
+Hash: 6c6965747576616d6b68787a62686d6b68787a62686d6b68787a62686d6b6878
+```
+
+```
+Original string: Lietuva
+Hash: 4c6965747576614d6b68787a62684d6b68787a62684d6b68787a62684d6b6878
+```
+
+```
+Original string: Lietuva!
+Hash: 4c696574757661214d6b68787a6268214d6b68787a6268214d6b68787a626821
+```
+
+**Rezultatas**
+
+Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės patobulinti kodo išsiskyrimą.
