@@ -119,3 +119,5 @@ Hash: 4c696574757661214d6b68787a6268214d6b68787a6268214d6b68787a626821
 **Rezultatas**
 
 Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės patobulinti kodo išsiskyrimą.
+
+xor kad lavinos efektas didesnis
