@@ -8,5 +8,4 @@ std::string stringToASCII(const std::string& input);
 std::string modifyString(const std::string& input);
 std::string generateHash(const std::string& input);
 std::string processLongerInput(const std::string& input); // Pridėta nauja funkcija
-std::string generateHash(const std::string& input);
 #endif // HASH_FUNCTION_H

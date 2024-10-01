@@ -3,14 +3,14 @@
 #include <iomanip>
 #include <string>
 #include <vector>
-#include <chrono> // Pridėta biblioteka laiko matavimui
+#include <chrono>
+#include <random>
 
 // Funkcija, kuri konvertuoja simbolių eilutę į ASCII kodus
 std::string stringToASCII(const std::string& input) {
     std::stringstream asciiStream;
 
     for (char c : input) {
-        // Konvertuojame kiekvieną simbolį į jo ASCII reikšmę ir paverčiame į hex formatą
         asciiStream << std::setw(2) << std::setfill('0') << std::hex << (int)c;
     }
 
@@ -23,12 +23,11 @@ std::string modifyString(const std::string& input) {
     for (size_t i = 0; i < modified.length(); i++) {
         char& c = modified[i];
         if (isalpha(c)) {
-            // Nustatome, kurioje vietoje abėcėlėje yra simbolis (pradedame nuo 'A' arba 'a')
             int base = isupper(c) ? 'A' : 'a';
-            int alphabeticPosition = c - base; // nustatome simbolio poziciją abėcėlėje
+            int alphabeticPosition = c - base;
 
             int shift = (alphabeticPosition + (i + 1)) % 26; // apskaičiuojame perkėlimą
-            c = base + shift; // perkeliamas į naują vietą pagal abėcėlės pradžią
+            c = base + shift; // perkeliamas į naują vietą
         }
     }
 
@@ -75,7 +74,7 @@ std::string processLongerInput(const std::string& input) {
         for (int j = 0; j < chunkSize; ++j) {
             char c = input[i * chunkSize + j];
             int asciiValue = static_cast<int>(c);
-            chunkSum += reduceToOneDigit(asciiValue); // Sumažiname iki vieno skaitmens
+            chunkSum += reduceToOneDigit(asciiValue);
         }
 
         // Kiekvieną sumažintą reikšmę konvertuojame į hex formatą
@@ -92,19 +91,39 @@ std::string processLongerInput(const std::string& input) {
     return hexResult;
 }
 
+// Funkcija, kuri generuoja atsitiktinį skaičių
+int generateRandomNumber() {
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_int_distribution<> dis(1, 100); // Generuojame skaičius nuo 1 iki 100
+    return dis(gen);
+}
+
 // Maišos funkcija, kuri sugeneruoja 64 simbolių ilgumo maišos kodą
 std::string generateHash(const std::string& input) {
     auto start = std::chrono::high_resolution_clock::now(); // Pradėti matuoti laiką
 
     std::string hash;
+
+    // Įvesčių ilgiui < 64
     if (input.length() <= 64) {
-        // Jei įvesties ilgis <= 64, naudojame pirmąjį metodą
         std::string asciiHash = stringToASCII(input);
 
         // Pridedame daugiau simbolių, jei reikia
         while (asciiHash.length() < 64) {
             std::string modifiedInput = modifyString(input);
             asciiHash += stringToASCII(modifiedInput);
+        }
+
+        // Pridėkite atsitiktinį skaičių prie ASCII hash
+        int randomNum = generateRandomNumber();
+        asciiHash += std::to_string(randomNum);
+
+        // Pakeiskime keletą simbolių, kad rezultatas pasikeistų
+        for (size_t i = 0; i < asciiHash.length(); i++) {
+            if (i % 5 == 0) { // Pakeisti kas penktą simbolį
+                asciiHash[i] = 'A' + (randomNum % 26); // Atsitiktinai pasirinktas simbolis
+            }
         }
 
         // Apkarpome iki 64 simbolių
