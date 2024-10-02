@@ -1,7 +1,7 @@
 # Hash generatoriaus kūrimas
 ## Maišos funkcijos idėja Pseudo-kodo stiliumi
 
-<img width="500" alt="Drawing 1" src="https://github.com/user-attachments/assets/d4802077-dbc0-40d2-806e-14f51df31e41">
+<img width="501" alt="Drawing 1 (1)" src="https://github.com/user-attachments/assets/4e07d654-c502-460b-bd08-c96a846aae6b">
 
 ## Programos veikimas:
 
@@ -120,4 +120,4 @@ Hash: 4c696574757661214d6b68787a6268214d6b68787a6268214d6b68787a626821
 
 Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės patobulinti kodo išsiskyrimą.
 
-xor kad lavinos efektas didesnis
+
