@@ -126,7 +126,7 @@ Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės 
 
 <img width="500" alt="Drawing 1 (2)" src="https://github.com/user-attachments/assets/db7f9e75-2401-4132-b152-547b13738b33">
 
-<span style="color: red;">Šis tekstas bus mėlynos spalvos.</span>
+<span style="color: blue;">Šis tekstas bus mėlynos spalvos.</span>
 
 ## Programos veikimas:
 
