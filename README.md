@@ -82,11 +82,11 @@ Funkcija yra deterministinė
 
 ### 2. Hash apskaičiavimo laikas
 
-*Naudojau failus su 1000, 2000, 3000, 4000 simboliais.*
+*Naudojau konstitucija.txt (PATAISIAU)*
 
 | Simbolių skaičius | 1000   | 2000   | 3000   | 4000  |
 |-------------------|--------|--------|--------|-------|
-| Laikas (ms)       | 0.0767 | 0.1196 | 0.2999 | 0.452 |
+| Laikas (ms)       | 3.0767 | 4.1196 | 2.2999 | 4.452 |
 
 
 **Rezultatas**
@@ -126,7 +126,7 @@ Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės 
 
 <img width="500" alt="Drawing 1 (2)" src="https://github.com/user-attachments/assets/db7f9e75-2401-4132-b152-547b13738b33">
 
-<span style="color: blue;">Šis tekstas bus mėlynos spalvos.</span>
+Pakeistas kodas į racionalesnį, nėra toks painus.
 
 ## Programos veikimas:
 
@@ -170,7 +170,7 @@ Tuščio failo. **tuscias.txt**
 
 ```
 Original string (vienas_a.txt): aaaaaaaa
-Hash: 6161616161616161626364656667686962636465666768696263646566676869
+Hash: W1616W6161W1616W6263W4656W6768W9626W6465W6676W6962W3646W6667W869
 ```
 
 *random_input_1.txt output*
@@ -207,22 +207,76 @@ Funkcija yra deterministinė
 
 ### 2. Hash apskaičiavimo laikas
 
-*Naudojau failus su 1000, 2000, 3000, 4000 simboliais.*
+(V0.1 versijos testavime, panaudojau ne konstitucija.txt failą, 
+todėl sulyginau naudotų simbolių skaičių su eilučių skaičiumi, jog būtų galima palyginti ir
+V0.2 atlikau tinkamai)
 
-| Simbolių skaičius | 1000   | 2000   | 3000   | 4000  |
-|-------------------|--------|--------|--------|-------|
-| Laikas (ms)       | 0.0767 | 0.1196 | 0.2999 | 0.452 |
+*Naudojau failą konstitucija.txt *
+| Simbolių skaičius ~         |         |        |  1000  |  2000  | 3000  |       | 4000  |       |
+|-----------------------------|---------|--------|--------|--------|-------|-------|-------|-------|
+| Eilučių skaičius            | 1       |    8   |   16   |   32   |   53  |   64  |   76  |  128  |
+|-----------------------------|---------|--------|--------|--------|-------|-------|-------|-------|
+| Vidutinis laikas (ms)       |1.21928  |2.93526 |2.13968 |4.06148 |1.33172|3.08026|3.40688|27.8968|
+
+![Ekrano kopija (421)](https://github.com/user-attachments/assets/eadd5f32-77e6-4864-8859-26f3f6fd9ceb)
 
 
 **Rezultatas**
 
-Naudojant didesni kiekį simbolių, laikas irgi didėja. Bandysiu patobulinti efektyvumą.
+Naudojant didesni kiekį simbolių, laikas irgi didėja, bet palyginus su V0.1 laikas geresnis V0.2.
 
-### 3.  Iš hash funkcijos rezultato (output'o) praktiškai neįmanoma atgaminti pradinio įvedimo (input'o).
+### 3.  Iš hash funkcijos rezultato (output'o) praktiškai neįmanoma atgaminti pradinio įvedimo (input'o). Kolizija.
+
+*Sukūriau funkcijas, kurios sukuria atsitiktinių simbolių eilučių failus ir patikrina, ar yra kolizija*
+
+*25 000 porų, po 10 simbolių*
+
+```
+Iveskite norimu poru skaiciu: 25000
+Iveskite simboliu ilgi: 10
+Hash sukurimo laikas: 0.0508 ms
+Hash sukurimo laikas: 0.16 ms
+Hash sukurimo laikas: 0.0684 ms
+Nera hash koliziju.
+```
+
+*25 000 porų, po 100 simbolių*
+
+
+```
+Iveskite norimu poru skaiciu: 25000
+Iveskite simboliu ilgi: 100
+Hash sukurimo laikas: 0.0661 ms
+Hash sukurimo laikas: 0.0534 ms
+Hash sukurimo laikas: 0.1095 ms
+Nera hash koliziju.
+```
+
+*25 000 porų, po 500 simbolių*
+
+```
+Iveskite norimu poru skaiciu: 25000
+Iveskite simboliu ilgi: 500
+Hash sukurimo laikas: 0.049 ms
+Hash sukurimo laikas: 0.0398 ms
+Hash sukurimo laikas: 0.0288 ms
+Nera hash koliziju.
+```
+
+*25 000 porų, po 1000 simbolių*
+
+```
+Iveskite norimu poru skaiciu: 25000
+Iveskite simboliu ilgi: 1000
+Hash sukurimo laikas: 0.0465 ms
+Hash sukurimo laikas: 0.0257 ms
+Hash sukurimo laikas: 0.0446 ms
+Nera hash koliziju.
+```
 
 **Rezultatas**
 
-Iš anksčiau matytų output'ų ir input'ų galima teigti, jog jie nėra susiję, tačiau reikia didinti Lavinos efektą.
+Galima teigti, jog kolizijos nėra.
 
 ### 4. Lavinos efektas (angl. Avalanche effect)
 
