@@ -279,21 +279,17 @@ Galima teigti, jog kolizijos nėra.
 
 ### 4. Lavinos efektas (angl. Avalanche effect)
 
-```
-Original string: lietuva
-Hash: 6c6965747576616d6b68787a62686d6b68787a62686d6b68787a62686d6b6878
-```
+*Sugeneravau atsitiktinių eilučių poras ir išmatavau gautų hash'ų procentinį skirtingumą bitų ir HEX lygmenyse.
+Išvedžiau minimalią, maksimalią ir vidurkines "skirtingumo" reikšmes.*
 
-```
-Original string: Lietuva
-Hash: 4c6965747576614d6b68787a62684d6b68787a62684d6b68787a62684d6b6878
-```
+*eilučių skaičius: 100 000
+porų ilgių skaičius: 1000*
 
-```
-Original string: Lietuva!
-Hash: 4c696574757661214d6b68787a6268214d6b68787a6268214d6b68787a626821
-```
+
+| Min HEX skirtumas | Max HEX skirtumas | Vid HEX skirtumas | Min BIT skirtumas | Max BIT skirtumas | Vid BIT skirtumas |
++-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
+| 0%                | 4.687500%         | 1.692187%         | 24.414062%        | 41.015625%        | 31.491016%        |
 
 **Rezultatas**
 
-Hash kodai turi tam tikrų panašumų, tačiau nėra visiškai vienodi. Reikės patobulinti kodo išsiskyrimą.
+HEX bent vieną kartą yra surandamas toks pat hash, todėl min HEX skirtumas yra 0%. Tačiau BIT skirtumai yra geri.
