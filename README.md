@@ -287,9 +287,16 @@ porų ilgių skaičius: 1000*
 
 
 | Min HEX skirtumas | Max HEX skirtumas | Vid HEX skirtumas | Min BIT skirtumas | Max BIT skirtumas | Vid BIT skirtumas |
-+-------------------+-------------------+-------------------+-------------------+-------------------+-------------------+
-| 0%                | 4.687500%         | 1.692187%         | 24.414062%        | 41.015625%        | 31.491016%        |
+|-------------------|-------------------|-------------------|-------------------|-------------------|-------------------|
+| 0% / 0,015625%    | 4.687500%         | 1.692187%         | 24.414062%        | 41.015625%        | 31.491016%        |
 
 **Rezultatas**
 
-HEX bent vieną kartą yra surandamas toks pat hash, todėl min HEX skirtumas yra 0%. Tačiau BIT skirtumai yra geri.
+Tikrinant su didelio dydžio failu ir naudojant didelio dydžio poras HEX bent vieną kartą yra surandamas toks pat hash (kas yra keista, nes kolizija yra gera), 
+todėl min HEX skirtumas yra 0%. Tačiau BIT skirtumai yra geri. Gali būti problemos ir su pačia testavimo kodo dalimi, kadangi pati įrašius inputą,
+gaunu skirtigną outputą, kuris skiriasi bent vienu simobliu.
+
+## Išvados ##
+
+Sukurtas hash generatoriu visada sugeneruoja hash vienodo ilgio, determenistinė. Tikrinant kolizijos nebuvo, tačiau testuojant Lavinos efektą
+kolizija atrasta (tai gali būti ir kodo klaida, kurios surasti man nepavyko).
